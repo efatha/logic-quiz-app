@@ -1,30 +1,71 @@
+/* =============================
+    General Body & Container
+============================= */
 body {
     font-family: Arial, sans-serif;
     background: #0f172a;
     color: white;
     text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
 .container {
-    margin-top: 100px;
+    margin: 50px auto;
+    max-width: 500px;
+    padding: 20px;
 }
 
-input {
-    padding: 10px;
+/* =============================
+    Headings
+============================= */
+h1, h2 {
+    margin-bottom: 20px;
+    line-height: 1.4;
 }
 
-button {
-    padding: 10px 20px;
-    background: #38bdf8;
-    border: none;
-    color: white;
-    cursor: pointer;
+h1 {
+    font-size: 2em; /* bigger for mobile */
 }
 
-.alert {
-    padding: 10px;
+h2 {
+    font-size: 1.5em;
+}
+
+/* =============================
+    Input & Button
+============================= */
+input[type="text"] {
+    padding: 12px;
+    font-size: 1.2em;
+    width: 80%;
+    max-width: 100%;
     margin-bottom: 15px;
     border-radius: 5px;
+    border: none;
+}
+
+button, .btn {
+    padding: 12px 25px;
+    font-size: 1.2em;
+    background: #38bdf8;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    width: 50%;
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+/* =============================
+    Alerts / Flash Messages
+============================= */
+.alert {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 1.1em;
 }
 
 .success {
@@ -39,50 +80,60 @@ button {
 .danger {
     background-color: #dc2626;
 }
-.btn {
-  /* Layout & Typography */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 24px;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
 
-  /* Colors & Borders */
-  background-color: #16a34a; /* Primary green */
-  color: #ffffff;
-  border: 1px solid #15803d; /* Slightly darker green border for depth */
-  border-radius: 8px; /* Softer, modern rounding */
+/* =============================
+    Responsive Media Queries
+============================= */
+@media (max-width: 768px) { /* tablets and smaller */
+    .container {
+        margin: 30px 20px;
+        padding: 15px;
+    }
 
-  /* Visual Depth */
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  
-  /* Smooth Animations */
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  user-select: none;
+    h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    input[type="text"] {
+        width: 90%;
+        font-size: 1.1em;
+        padding: 10px;
+    }
+
+    button, .btn {
+        width: 80%;
+        font-size: 1.1em;
+        padding: 10px;
+    }
 }
 
-/* Hover State: Slight brighten and subtle lift */
-.btn:hover {
-  background-color: #15803d;
-  border-color: #166534;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
+@media (max-width: 480px) { /* smartphones & iPhones */
+    .container {
+        margin: 20px 10px;
+        padding: 10px;
+    }
 
-/* Active State: "Pressed" effect */
-.btn:active {
-  transform: translateY(0px);
-  background-color: #166534;
-  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-}
+    h1 {
+        font-size: 1.6em;
+    }
 
-/* Focus State: Accessibility ring */
-.btn:focus {
-  outline: none;
-  ring: 2px solid #22c55e;
-  ring-offset: 2px;
+    h2 {
+        font-size: 1.2em;
+    }
+
+    input[type="text"] {
+        width: 95%;
+        font-size: 1em;
+        padding: 8px;
+    }
+
+    button, .btn {
+        width: 95%;
+        font-size: 1em;
+        padding: 8px;
+    }
 }
