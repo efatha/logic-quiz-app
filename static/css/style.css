@@ -1,6 +1,4 @@
-/* =============================
-    General Body & Container
-============================= */
+/* General Body & Container */
 body {
     font-family: Arial, sans-serif;
     background: #0f172a;
@@ -16,9 +14,7 @@ body {
     padding: 20px;
 }
 
-/* =============================
-    Headings
-============================= */
+/* Headings */
 h1, h2 {
     margin-bottom: 20px;
     line-height: 1.4;
@@ -32,9 +28,7 @@ h2 {
     font-size: 1.5em;
 }
 
-/* =============================
-    Input & Button
-============================= */
+/* Input & Button */
 input[type="text"] {
     padding: 12px;
     font-size: 1.2em;
@@ -58,14 +52,61 @@ button, .btn {
     margin-bottom: 20px;
 }
 
-/* =============================
-    Alerts / Flash Messages
-============================= */
+/* Alerts / Flash Messages */
 .alert {
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 5px;
     font-size: 1.1em;
+}
+    /* Flash Messages Animation */
+.alert {
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Fade out after 3 seconds using JS */
+.alert.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+/* Buttons Hover Effect */
+button:hover, .btn:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    background-color: #0ea5e9; /* lighter shade on hover */
+}
+
+/* Animations */
+input[type="text"]:focus {
+    outline: none;
+    border: 2px solid #38bdf8;
+    transition: border 0.3s ease-in-out;
+}
+/* Question Container Animation */
+.question-container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.5s forwards;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .success {
@@ -81,9 +122,7 @@ button, .btn {
     background-color: #dc2626;
 }
 
-/* =============================
-    Responsive Media Queries
-============================= */
+/* Responsive Media Queries */
 @media (max-width: 768px) { /* tablets and smaller */
     .container {
         margin: 30px 20px;
