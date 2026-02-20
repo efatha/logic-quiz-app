@@ -1,12 +1,23 @@
 {% extends "base.html" %}
+
 {% block content %}
+
+<div class="progress-container">
+    <div class="progress-bar" style="width: {{ progress }}%;">
+        {{ progress }}%
+    </div>
+</div>
+
+<p>Question {{ current }} of {{ total }}</p>
+
 <div class="question-container">
     <h2>{{ question }}</h2>
     <p>Attempts left: {{ attempts_left }}</p>
 
     <form method="POST">
-        <input type="text" name="answer" required>
-        <button type="submit">Submit</button>
+        <input type="text" name="answer" class="form-control" required>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
 {% endblock %}

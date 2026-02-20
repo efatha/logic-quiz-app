@@ -1,178 +1,70 @@
-/* General Body & Container */
+/* Optional background only */
 body {
-    font-family: Arial, sans-serif;
     background: #0f172a;
     color: white;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    margin: 50px auto;
-    max-width: 500px;
-    padding: 20px;
 }
 
 /* Headings */
 h1, h2 {
-    margin-bottom: 20px;
     line-height: 1.4;
 }
 
-h1 {
-    font-size: 2em; /* bigger for mobile */
-}
-
-h2 {
-    font-size: 1.5em;
-}
-
-/* Input & Button */
-input[type="text"] {
-    padding: 12px;
-    font-size: 1.2em;
-    width: 80%;
-    max-width: 100%;
-    margin-bottom: 15px;
+/* Inputs (without breaking Bootstrap sizing) */
+input[type="text"], .answer {
     border-radius: 5px;
-    border: none;
 }
 
-button, .btn {
-    padding: 12px 25px;
-    font-size: 1.2em;
-    background: #38bdf8;
+/* Buttons */
+.btn {
+    margin-top: 10px;
+    background: #139fdb;
     border: none;
-    border-radius: 5px;
     color: white;
-    cursor: pointer;
-    width: 50%;
-    max-width: 200px;
-    margin-bottom: 20px;
 }
 
-/* Alerts / Flash Messages */
-.alert {
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    font-size: 1.1em;
+/* Button Hover */
+button:hover, .btn:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-in-out;
 }
-    /* Flash Messages Animation */
+
+/* Input Focus */
+input[type="text"]:focus {
+    outline: none;
+    border: 2px solid #38bdf8;
+}
+
+/* Alerts */
 .alert {
-    opacity: 0;
     animation: fadeIn 0.5s forwards;
 }
 
-/* Fade in animation */
 @keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Fade out after 3 seconds using JS */
+/* Flash fade out */
 .alert.fade-out {
     animation: fadeOut 0.5s forwards;
 }
 
 @keyframes fadeOut {
-    to {
-        opacity: 0;
-    }
-}
-/* Buttons Hover Effect */
-button:hover, .btn:hover {
-    transform: scale(1.05);
-    transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-    background-color: #0ea5e9; /* lighter shade on hover */
+    to { opacity: 0; }
 }
 
-/* Animations */
-input[type="text"]:focus {
-    outline: none;
-    border: 2px solid #38bdf8;
-    transition: border 0.3s ease-in-out;
-}
-/* Question Container Animation */
+/* Question animation */
 .question-container {
-    opacity: 0;
-    transform: translateY(20px);
     animation: slideUp 0.5s forwards;
 }
 
 @keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-.success {
-    background-color: #16a34a;
-}
-
-.warning {
-    background-color: #facc15;
-    color: black;
-}
-
-.danger {
-    background-color: #dc2626;
-}
-
-/* Responsive Media Queries */
-@media (max-width: 768px) { /* tablets and smaller */
-    .container {
-        margin: 30px 20px;
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-    }
-
-    h2 {
-        font-size: 1.3em;
-    }
-
-    input[type="text"] {
-        width: 90%;
-        font-size: 1.1em;
-        padding: 10px;
-    }
-
-    button, .btn {
-        width: 80%;
-        font-size: 1.1em;
-        padding: 10px;
-    }
-}
-
-@media (max-width: 480px) { /* smartphones & iPhones */
-    .container {
-        margin: 20px 10px;
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 1.6em;
-    }
-
-    h2 {
-        font-size: 1.2em;
-    }
-
-    input[type="text"] {
-        width: 95%;
-        font-size: 1em;
-        padding: 8px;
-    }
-
-    button, .btn {
-        width: 95%;
-        font-size: 1em;
-        padding: 8px;
     }
 }

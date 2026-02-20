@@ -1,24 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Logic Quiz</title>
+    <meta charset="UTF-8">
+    <title>LogicMaster Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-dark shadow-sm">
     <div class="container">
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category, message in messages %}
-              <div class="alert {{ category }}">
-                {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-
-        {% block content %}{% endblock %}
-        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+            🧠 LogicMaster
+        </a>
     </div>
+</nav>
+
+<div class="container py-5">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg p-4">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="text-center py-3 text-muted">
+    © 2026 LogicMaster — Built by Efatha Rutakaza
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

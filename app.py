@@ -26,18 +26,33 @@ QUESTION_BANK = [
 MAX_ATTEMPTS = 5
 
 
+# ===============================
+# HOME ROUTE
+# ===============================
 @app.route("/")
 def index():
     session.clear()
     questions = QUESTION_BANK.copy()
     random.shuffle(questions)
+
     session["questions"] = questions
     session["score"] = 0
     session["current"] = 0
     session["attempts"] = 0
+
+    # Advanced tracking system
+    session["tracking"] = {
+        "correct": 0,
+        "wrong": 0,
+        "history": []
+    }
+
     return render_template("index.html")
 
 
+# ===============================
+# QUIZ ROUTE
+# ===============================
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
     if "questions" not in session:
@@ -52,38 +67,85 @@ def quiz():
     question, answer = questions[current]
 
     if request.method == "POST":
-        user_answer = request.form.get("answer").strip().lower()
+        user_answer = request.form.get("answer", "").strip().lower()
         session["attempts"] += 1
 
+        tracking = session["tracking"]
+
+        # CORRECT ANSWER
         if user_answer == answer:
             flash("✅ Correct answer!", "success")
+
             session["score"] += 1
+            tracking["correct"] += 1
+
+            tracking["history"].append({
+                "question": question,
+                "correct_answer": answer,
+                "user_answer": user_answer,
+                "status": "Correct"
+            })
+
             session["current"] += 1
             session["attempts"] = 0
+            session["tracking"] = tracking
+
             return redirect(url_for("quiz"))
 
+        # FAILED AFTER MAX ATTEMPTS
         if session["attempts"] >= MAX_ATTEMPTS:
             flash(f"❌ You failed! Correct answer: {answer}", "danger")
+
+            tracking["wrong"] += 1
+
+            tracking["history"].append({
+                "question": question,
+                "correct_answer": answer,
+                "user_answer": user_answer,
+                "status": "Failed"
+            })
+
             session["current"] += 1
             session["attempts"] = 0
+            session["tracking"] = tracking
+
             return redirect(url_for("quiz"))
 
         flash("❌ Incorrect answer. Try again.", "warning")
 
+    # Progress calculation
+    progress = int((session["current"] / len(questions)) * 100)
+
     return render_template(
         "quiz.html",
         question=question,
-        attempts_left=MAX_ATTEMPTS - session["attempts"]
+        attempts_left=MAX_ATTEMPTS - session["attempts"],
+        progress=progress,
+        current=current + 1,
+        total=len(questions)
     )
 
 
+# ===============================
+# RESULT ROUTE
+# ===============================
 @app.route("/result")
 def result():
+    tracking = session.get("tracking", {})
     score = session.get("score", 0)
     total = len(session.get("questions", []))
-    return render_template("result.html", score=score, total=total)
+
+    return render_template(
+        "result.html",
+        score=score,
+        total=total,
+        tracking=tracking
+    )
 
 
+# ===============================
+# RUN SERVER
+# ===============================
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
